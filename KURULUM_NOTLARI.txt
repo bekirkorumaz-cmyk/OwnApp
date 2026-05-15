@@ -1,0 +1,187 @@
+THE RHYTHM / OwnApp - KURULUM VE DEVAM NOTLARI
+
+AMAC
+- Bu dosya projeyi yeni bir bilgisayarda acmak, calistirmak, build almak ve gerekli kritik bilgileri tek yerden gorebilmek icin tutulur.
+- Gizli hesaplar ve anahtarlar repoda tutulmaz; `HESAPLAR_OZEL\HESAPLAR_OZEL.txt` dosyasinda saklanir.
+
+PROJE OZETI
+- Uygulama bir regl dongusu takip uygulamasidir.
+- React Native + Expo ile gelistirilmistir.
+- Iki mod vardir:
+  - Anonim mod: veriler cihaz ici SQLite icinde tutulur.
+  - Kayitli hesap modu: veriler Supabase Auth + Supabase PostgreSQL uzerinde tutulur.
+
+TEMEL TEKNOLOJILER
+- Node.js: 20 LTS onerilir
+- Expo: ~54.0.33
+- React Native: 0.81.5
+- React: 19.1.0
+- Supabase JS: ^2.101.1
+- Expo SQLite: ~16.0.10
+- Expo Notifications: ~0.32.16
+- Reanimated: ~4.1.1
+- react-native-worklets: 0.5.1
+- @expo/ngrok: ^4.1.3
+
+PROJE KIMLIGI
+- Proje adi: THE RHYTHM / OwnApp
+- Uygulama adi: OwnApp
+- Expo slug: THE_RHYTHM
+- Expo scheme: ownapp
+- Android package: com.thecacaro15.ownapp
+- Expo projectId: 85f6ea9e-2452-4cbd-bf04-ab543d653cc9
+- Uygulama surumu: 1.0.0
+
+ONEMLI KLASORLER
+- `src`: ana uygulama kodu
+- `assets`: gorseller ve intro varliklari
+- `android`: native Android proje klasoru
+- `supabase`: edge function ve Supabase ayarlari
+- `logo`: marka/logoya ait dosyalar
+- `HESAPLAR_OZEL`: repoya girmeyen hesap ve anahtar klasoru
+
+ONEMLI DOSYALAR
+- `App.js`: auth gate, acilis ve genel perde akisi
+- `app.json`: Expo uygulama kimligi ve pluginler
+- `app.config.js`: env degerlerini Expo tarafina aktarir
+- `eas.json`: EAS build profilleri
+- `package.json`: bagimliliklar ve scriptler
+- `src/context/AuthContext.js`: anonim/kayitli hesap akisleri
+- `src/services/localPeriodLogs.js`: SQLite tarafi
+- `src/services/periodLogs.js`: Supabase tarafi
+- `src/services/accountDeletion.js`: hesap silme istegi
+- `supabase/functions/delete-account/index.ts`: hesap silme edge function
+- `supabase_schema.sql`: tablo ve RLS notlari
+- `PRIVACY_POLICY_TR.md`: gizlilik politikasi metni
+
+KULLANICI OZELLIKLERI
+- Anonim mod ile hizli giris
+- E-posta ve sifre ile kayitli hesap
+- SQLite tabanli lokal veri saklama
+- Supabase tabanli bulut veri saklama
+- Ilk kurulumda son regl tarihi ve sure girisi
+- Gecmis regl kaydi ekleme, guncelleme ve silme
+- Sonraki regl, ovulasyon ve verimli donem tahmini
+- Tahmin guveni gostergesi
+- Bildirim tercihleri
+- Aydinlik / karanlik mod
+- Profil duzenleme
+- Hesap silme akişi
+
+VERI MODELI
+- Anonim modda veriler cihazdaki `the_rhythm.db` SQLite veritabaninda saklanir.
+- Kayitli hesapta veriler Supabase `period_logs` tablosuna kullanici bazli yazilir.
+- Profil ve oturum akisi `AuthContext` uzerinden yonetilir.
+
+YENI BILGISAYARDA ILK KURULUM
+1. Projeyi ASCII karakterli bir klasore koyun.
+   - Ornek: `C:\dev\THE_RHYTHM`
+   - Ornek: `Y:\bekir\THE_RHYTHM`
+2. `HESAPLAR_OZEL` klasorunu proje kokune kopyalayin.
+3. Terminali proje kokunde acin.
+4. `.env` dosyasini `HESAPLAR_OZEL\HESAPLAR_OZEL.txt` icindeki degerlerle olusturun.
+5. Paketleri kurun:
+   - `npm install`
+6. Uygulamayi baslatin:
+   - `npx expo start --clear`
+
+EXPO GO
+- Yerel ag acilisi:
+  - `expo_go_wifi.bat`
+- Tunnel acilisi:
+  - `expo_go_tunnel.bat`
+- Sorunlu aglarda dogrudan LAN test:
+  - `expo_go_lan_test.bat`
+- LAN sorunu varsa tunnel tercih edin.
+- Ayni anda birden fazla Metro sureci acik kalmamali.
+- 30.04.2026 notu: Bu modemde PC Wi-Fi ile bagliyken telefon Expo Go serverina erisemedi. PC Ethernet ile modeme baglaninca, telefon ayni modemin Wi-Fi agindayken Expo Go calisti.
+- Ethernet testinde PC IP adresi `192.168.1.111`, Expo portu `8082` idi. Telefon tarayicisinda once `http://192.168.1.111:8082/status`, sonra Expo Go icinde `exp://192.168.1.111:8082` kullanildi.
+- Windows/Expo izin sorunlari icin `expo_ag_izinlerini_duzelt_admin.bat` eklendi. Gerekirse firewall testi icin `expo_firewall_gecici_kapat_admin.bat` ve geri acmak icin `expo_firewall_tekrar_ac_admin.bat` kullanilir.
+- Expo CLI `C:\Users\...\ .expo` altinda izin hatasi verdigi icin Expo home klasoru proje icindeki `.expo-home` yoluna yonlendirildi.
+- Expo hesabi girisi `.expo-home` altinda yapildi; hesap bilgileri `HESAPLAR_OZEL\HESAPLAR_OZEL.txt` icinde tutulur.
+
+EAS BUILD
+- `development`: development client
+- `preview`: internal APK
+- `production`: production AAB
+
+Kullanilan komutlar:
+- `npx eas build -p android --profile preview --non-interactive`
+- `npx eas build -p android --profile production --non-interactive`
+- `npx eas build:list --platform android --limit 5 --non-interactive`
+
+EAS NOTU
+- `eas.json` icinde gizli env tutulmaz.
+- Gerekirse EAS panelinde veya lokal ortamda env tekrar tanimlanir.
+
+ANDROID YEREL BUILD
+- Gerekli yazilimlar:
+  - Git
+  - Node.js 20 LTS
+  - JDK 17
+  - Android Studio
+  - Android SDK
+- Bu projede Windows yol sorunlari nedeniyle ASCII yol kullanimi onemlidir.
+- Lokal build scriptleri ortam degiskenlerini proje icindeki gecici klasorlere yonlendirebilir.
+
+KALAN BAT DOSYALARININ AMACI
+- `lokal_apk_debug.bat`: hizli debug APK uretir
+- `lokal_apk_release.bat`: release APK uretir
+- `lokal_aab_release.bat`: release AAB uretir
+- `lokal_apk_aab_cikar.bat`: release APK ve AAB birlikte uretir
+- `expo_go_wifi.bat`: Expo Go LAN
+- `expo_go_tunnel.bat`: Expo Go Tunnel
+- `yedekle.bat`: gerekli proje dosyalarinin yedegini alir
+
+LOKAL CIKTILAR
+- Debug APK:
+  - `android\app\build\outputs\apk\debug\app-debug.apk`
+- Release APK:
+  - `android\app\build\outputs\apk\release\app-release.apk`
+- Release AAB:
+  - `android\app\build\outputs\bundle\release\app-release.aab`
+
+ANDROID IMZALAMA
+- Release keystore:
+  - `android/app/upload-keystore.jks`
+- Keystore ayari:
+  - `android/keystore.properties`
+- Bu dosyalar yeni bilgisayarda korunmalidir.
+- Detayli sifre ve alias bilgileri `HESAPLAR_OZEL\HESAPLAR_OZEL.txt` icindedir.
+
+SUPABASE NOTLARI
+- Hesap silme `delete-account` edge function ile yapilir.
+- `verify_jwt = false` notu korunmustur.
+- Service role key asla client bundle icine konmamalidir.
+- Public anon key client tarafinda kullanilabilir.
+- Gerekli gizli degerler sadece `HESAPLAR_OZEL\HESAPLAR_OZEL.txt` icinde tutulur.
+
+GOOGLE PLAY NOTLARI
+- Kapali test surumu yayina alinmistir.
+- 16.04.2026 itibariyla kapali testte en az 12 test kullanicisi bulunuyordu.
+- Ayni test kanalina yeni AAB yuklenirse kullanicilari yeniden eklemek gerekmez.
+- Yeni yuklemede `versionCode` daha yuksek olmalidir.
+
+TASARIM VE DAVRANIS ILKELERI
+- Genel tasarim soft ve minimalist kalmali.
+- Mümkun oldugunca native beyaz `Alert` yerine `ThemedDialog` kullanilmali.
+- Gecislerde bozuk ara kare gostermemek icin tema perdesi mantigi korunmali.
+- Ovulasyon rengi mavi degil mor cizgide kalmali.
+- Home ve onboarding ekranlari kucuk cihazlarda da taskinlik yapmamali.
+
+KRITIK DERSLER
+- `react-native-worklets` surumu Expo SDK ile uyumlu kalmali.
+- Paket guncellemelerinden sonra gerekirse `npx expo start --clear` calistirilmali.
+- Expo Go bildirim testleri sinirlidir; daha guvenilir test icin build alinabilir.
+- EAS arsivi gereksiz buyurse once `.easignore` kontrol edilmelidir.
+- Silinmis hesap sonrasi sahte oturum kalmamasi icin session temizligi onemlidir.
+
+YEDEK VE GIT NOTU
+- `node_modules`, `.expo`, `.gradle-user`, `.home-user`, `.tmp-build`, `android/build`, `android/app/build` gibi klasorler repoya ve yedek klasorune alinmaz.
+- Gizli dosyalar ve hesaplar `HESAPLAR_OZEL` klasorunde tutulur.
+- `.env` dosyasi Git'e gonderilmez.
+
+AJAN ICIN KISA NOT
+- Kullanici ile iletisim Turkce olmali.
+- Once `KURULUM_NOTLARI.txt`, sonra gerekirse `HESAPLAR_OZEL\HESAPLAR_OZEL.txt` okunmali.
+- Ana aktif kaynak `src`, `android`, `supabase` ve kok config dosyalaridir.

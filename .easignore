@@ -1,0 +1,30 @@
+# Dependencies
+node_modules
+
+# Local caches
+.expo
+.gradle-user
+.home-user
+.tmp-build
+.tmp-export-test
+
+# Android generated outputs
+android/.gradle
+android/build
+android/app/build
+android/local.properties
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+prebuild-local.log
+
+# Local env and secrets
+.env
+HESAPLAR_OZEL
+
+# Removed scratch folders
+ekran_goruntusu
+kodlar

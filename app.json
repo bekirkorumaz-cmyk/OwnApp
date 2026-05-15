@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "OwnApp",
+    "slug": "THE_RHYTHM",
+    "scheme": "ownapp",
+    "version": "1.0.0",
+    "description": "Adet dongusu takibi, tahmini donem hesaplamalari ve bildirim hatirlatmalari sunan kisisel takip uygulamasi.",
+    "orientation": "portrait",
+    "icon": "./logo/own_app.png",
+    "userInterfaceStyle": "dark",
+    "splash": {
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./logo/own_app.png",
+        "backgroundColor": "#ffffff"
+      },
+      "edgeToEdgeEnabled": true,
+      "package": "com.thecacaro15.ownapp"
+    },
+    "web": {
+      "favicon": "./logo/own_app.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "85f6ea9e-2452-4cbd-bf04-ab543d653cc9"
+      }
+    },
+    "plugins": [
+      "expo-sqlite",
+      "expo-notifications"
+    ]
+  }
+}
