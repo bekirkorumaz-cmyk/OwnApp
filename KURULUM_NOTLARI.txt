@@ -185,3 +185,22 @@ AJAN ICIN KISA NOT
 - Kullanici ile iletisim Turkce olmali.
 - Once `KURULUM_NOTLARI.txt`, sonra gerekirse `HESAPLAR_OZEL\HESAPLAR_OZEL.txt` okunmali.
 - Ana aktif kaynak `src`, `android`, `supabase` ve kok config dosyalaridir.
+
+YENI BILGISAYARA GECERKEN AYRICA KOPYALANACAKLAR
+- Sadece GitHub'dan projeyi cekmek yeterli degildir; Git'e girmeyen ozel dosyalar ayrica tasinmalidir.
+- Uygulamayi Expo Go ile calistirmak icin mutlaka kopyalanacaklar:
+  - `HESAPLAR_OZEL\`
+  - `.env`
+- Yeni bilgisayarda APK veya AAB build de alinacaksa ayrica kopyalanacaklar:
+  - `android\app\upload-keystore.jks`
+  - `android\keystore.properties`
+- Kopyalamaya gerek olmayan, yeni bilgisayarda yeniden olusacak klasorler:
+  - `node_modules\`
+  - `.expo\`
+  - `.expo-home\`
+  - `.gradle-user\`
+  - `.home-user\`
+  - `.tmp-build\`
+  - `.tmp-export-test\`
+  - `android\build\`
+  - `android\app\build\`
